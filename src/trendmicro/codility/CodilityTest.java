@@ -1,48 +1,58 @@
 package trendmicro.codility;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class CodilityTest {
 
 	public static void main(String[] args) {
 		// System.out.println("I'm about to take CodilityTest");
 
-		// int[] A = {3,4,7,7,6,6}; // 6個糖果，分一半出去，求最大多樣性
-		int[] A = {80, 80, 1000000000, 80, 80, 80, 80, 80, 80, 123456789};
-		int result = solution(A);
-		 System.out.println(result);
-
 		
-	}
-	
-	public static int solution(int[] T) {
 		
-		// 總糖果數
-		int totalCandyNumber = T.length;
-		
-		// Mary的糖果盒，最多可以裝的糖果數量
-		int marrysCandyBoxMaxNum = totalCandyNumber/2;
-		
-		// Mary的糖果盒
-		List<Integer> list = new ArrayList<Integer>();
-		list.add(T[0]);
-		
-		// 之後逐一比對，不含就放進來，放滿為止
-		for(int i = 1; i<totalCandyNumber; i++) {
-			if(!list.contains(T[i])) {
-				list.add(T[i]);
-				if(list.size()==marrysCandyBoxMaxNum) {
-					// 裝滿了就出去
-					return list.size();
-				}
-			}
-			
+		// 
+		String point1 = "Wed 04:25";
+        String point2 = "Wed 15:14";
+        
+        // 找出兩個時間點的長度
+        try {
+			long timeSlotLength = timeSlotLength(point1,point2);
+			System.out.println(timeSlotLength);
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
+        
+        
+
+
+    }
+
+	// 找出兩個時間點的長度
+	private static long timeSlotLength(String point1, String point2) throws ParseException {
+		DateFormat format = new SimpleDateFormat("E HH:mm", Locale.ENGLISH);
+		Date date1;
+		Date date2;
+
+		// String point1 = "Wed 04:25";
+		// String point2 = "Wed 15:14";
+
+		date1 = format.parse(point1);
+		date2 = format.parse(point2);
+		// System.out.println(date1); // Sat Jan 02 00:00:00 GMT 2010
+		long difference = date2.getTime() - date1.getTime();
+
+		return difference;
+	}
 		
-		// loop跑完，裝多少是多少
-		return list.size();
+	
+	
+	public static int solution(String S) {
+		
+
+		return 0;
 	}
 	
 //	public static boolean contains(int[] arr, int item) {
@@ -53,9 +63,6 @@ public class CodilityTest {
 //		}
 //		return false;
 //	}
-	
-	
-	
 	
 //	public static boolean bGreaterThanA(Integer a, Integer b) {
 ////		Integer a = 8;
